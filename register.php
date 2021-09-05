@@ -1,18 +1,19 @@
 <?php
+require_once("includes/config.php");
+require_once("includes/classes/FormSanitizer.php");
     if(isset($_POST["submitButton"])){
-        $firstName=sanitizeFormString($_POST["firstName"]);
-        echo $firstName;
+        $firstName=FormSanitizer::sanitizeFormString($_POST["firstName"]);
+        $lastName=FormSanitizer::sanitizeFormString($_POST["lastName"]);
+        $username=FormSanitizer::sanitizeFormUsername($_POST["username"]);
+        $email=FormSanitizer::sanitizeFormEmail($_POST["email"]);
+        $email2=FormSanitizer::sanitizeFormEmail($_POST["email2"]);
+        $password=FormSanitizer::sanitizeFormPassword($_POST["password"]);
+        $password2=FormSanitizer::sanitizeFormPassword($_POST["password2"]);
+    
         
     }
 
-    function sanitizeFormString($inputText){
-        $inputText=strip_tags($inputText);
-        //$inputText=str_replace(" ","",$inputText);
-        $inputText=trim($inputText);
-        $inputText=strtolower($inputText);
-        $inputText=ucfirst($inputText);
-        return $inputText;
-    }
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,7 +32,7 @@
                 </div>
                 <form method="POST">
                     <input type="text" name="firstName" placeholder="First Name" required>
-                    <input type="text" name="lasttName" placeholder="Last Name" required>
+                    <input type="text" name="lastName" placeholder="Last Name" required>
                     <input type="text" name="username" placeholder="Username" required>
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="email" name="email2" placeholder="Confirm email" required>
